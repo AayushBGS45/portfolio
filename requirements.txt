@@ -1,0 +1,33 @@
+# ==============================================================================
+# NOTE: This is a Node.js / React (Vite) project, not a Python project!
+# Dependencies in Node.js are tracked in package.json and package-lock.json.
+# ==============================================================================
+#
+# --- System Requirements ---
+# Node.js: >= 18.0.0 (Recommended: v20 LTS or v22 LTS)
+# Package Manager: npm (comes bundled with Node.js), yarn, or pnpm
+#
+# --- Quick Setup Instructions for Any IDE or Environment ---
+# 1. Install Node.js from https://nodejs.org/ if not already installed.
+# 2. Open this directory in your IDE/terminal.
+# 3. Run:
+#      npm install
+# 4. To start the local development server:
+#      npm run dev
+# 5. To create an optimized production build:
+#      npm run build
+#
+# ==============================================================================
+# Listed Dependencies (defined in package.json):
+# ==============================================================================
+# Runtime Dependencies:
+#   lucide-react@^1.58.0
+#   react@^19.2.8
+#   react-dom@^19.2.8
+#
+# Dev Dependencies:
+#   @types/react@^19.2.18
+#   @types/react-dom@^19.2.7
+#   @vitejs/plugin-react@^6.1.1
+#   oxlint@^1.81.0
+#   vite@^8.3.0

@@ -1,0 +1,98 @@
+/* ============================================================
+   EDUCATION SECTION
+   ============================================================ */
+.education__header {
+  max-width: 640px;
+  margin-bottom: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.education__subtitle { color: var(--text-secondary); }
+
+.education__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: var(--space-lg);
+}
+
+/* Education card */
+.edu-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding: var(--space-xl);
+}
+
+.edu-card__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  color: var(--accent-cyan);
+  margin-bottom: 0.5rem;
+}
+
+.edu-card__period {
+  color: var(--accent-purple-light);
+}
+
+.edu-card__degree {
+  color: var(--text-primary);
+}
+
+.edu-card__field {
+  color: var(--text-secondary);
+}
+
+.edu-card__institution {
+  color: var(--accent-cyan);
+}
+
+.edu-card__grade {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.875rem;
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: var(--radius-full);
+  width: fit-content;
+  margin-top: 0.25rem;
+}
+
+/* Highlights */
+.edu-card__highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 0.625rem;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 0.25rem;
+}
+
+.edu-card__highlight {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.edu-card__bullet {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  flex-shrink: 0;
+  margin-top: 0.4em;
+}
+
+@media (max-width: 767px) {
+  .education__grid { grid-template-columns: 1fr; }
+  .edu-card { padding: var(--space-lg); }
+}

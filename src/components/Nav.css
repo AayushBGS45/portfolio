@@ -1,0 +1,183 @@
+/* ============================================================
+   FLOATING PILL NAVIGATION
+   ============================================================ */
+.nav-pill {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  transition: top 0.3s ease;
+}
+
+.nav-pill__inner {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  background: rgba(11, 15, 19, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top-color: rgba(0, 240, 255, 0.3);
+  border-radius: 9999px;
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.8);
+}
+
+.nav-pill--scrolled .nav-pill__inner {
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(0, 240, 255, 0.15);
+}
+
+/* Brand */
+.nav-pill__brand {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #00F0FF 0%, #A855F7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.625rem;
+  margin-right: 0.375rem;
+  cursor: pointer;
+  user-select: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+}
+
+/* Nav list */
+.nav-pill__list {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.nav-pill__item {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #9CA3AF;
+  padding: 0.4rem 0.875rem;
+  border-radius: 9999px;
+  transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-pill__item:hover {
+  color: var(--text-primary, #F3F4F6);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-pill__item--active {
+  color: var(--accent-cyan) !important;
+  background: rgba(0, 240, 255, 0.1) !important;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.15);
+}
+
+/* Hamburger */
+.nav-pill__menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin-left: 0.25rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  transition: background 0.2s ease;
+}
+
+.nav-pill__menu-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 18px;
+  height: 18px;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: #9CA3AF;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+
+.hamburger--open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.hamburger--open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger--open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(280px, 80vw);
+  background: rgba(11, 15, 19, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 999;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 6rem 2rem 2rem;
+}
+
+.mobile-drawer--open {
+  transform: translateX(0);
+}
+
+.mobile-drawer__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 998;
+}
+
+.mobile-drawer__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mobile-drawer__item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #9CA3AF;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.mobile-drawer__item:hover,
+.mobile-drawer__item--active {
+  color: var(--accent-cyan);
+  background: rgba(0, 240, 255, 0.08);
+  border-left: 2px solid var(--accent-purple);
+}
+
+/* ============================================================
+   RESPONSIVE: Hide nav items on mobile, show hamburger
+   ============================================================ */
+@media (max-width: 767px) {
+  .nav-pill__list { display: none; }
+  .nav-pill__menu-btn { display: flex; }
+  .nav-pill__brand { margin-right: 0; }
+}
