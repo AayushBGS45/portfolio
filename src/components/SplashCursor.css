@@ -1,0 +1,27 @@
+.splash-cursor {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: screen;
+  opacity: 0.78;
+}
+
+/* Light mode: screen blend mode makes everything white on a white background,
+   so we use multiply to make the rich ocean water wave ripples clearly visible */
+[data-theme="light"] .splash-cursor {
+  mix-blend-mode: multiply;
+  opacity: 0.95;
+}
+
+.splash-cursor[data-contained] {
+  position: absolute;
+}
+
+.splash-cursor__canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}

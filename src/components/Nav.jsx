@@ -10,11 +10,34 @@ const NAV_ITEMS = [
   { id: 'contact',    label: 'Contact'    },
 ];
 
-export default function Nav() {
+function SunIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  );
+}
+
+export default function Nav({ isDark, toggleTheme }) {
   const [active, setActive] = useState('home');
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const indicatorRef = useRef(null);
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -39,6 +62,7 @@ export default function Nav() {
     setMobileOpen(false);
   };
 
+
   return (
     <>
       <nav className={`nav-pill${scrolled ? ' nav-pill--scrolled' : ''}`} ref={navRef} aria-label="Main navigation">
@@ -61,6 +85,21 @@ export default function Nav() {
               </li>
             ))}
           </ul>
+
+          {/* Theme toggle button */}
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            id="theme-toggle-btn"
+            title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            <span className="theme-toggle__track">
+              <span className={`theme-toggle__thumb ${isDark ? 'theme-toggle__thumb--dark' : 'theme-toggle__thumb--light'}`}>
+                {isDark ? <MoonIcon /> : <SunIcon />}
+              </span>
+            </span>
+          </button>
 
           <button
             className="nav-pill__menu-btn"
@@ -89,6 +128,18 @@ export default function Nav() {
             </li>
           ))}
         </ul>
+
+        {/* Theme toggle in mobile drawer too */}
+        <div className="mobile-drawer__theme">
+          <button className="theme-toggle theme-toggle--mobile" onClick={toggleTheme} id="theme-toggle-mobile-btn">
+            <span className="theme-toggle__track">
+              <span className={`theme-toggle__thumb ${isDark ? 'theme-toggle__thumb--dark' : 'theme-toggle__thumb--light'}`}>
+                {isDark ? <MoonIcon /> : <SunIcon />}
+              </span>
+            </span>
+          </button>
+          <span className="mobile-drawer__theme-label">{isDark ? 'Dark Mode' : 'Light Mode'}</span>
+        </div>
       </div>
       {mobileOpen && (
         <div className="mobile-drawer__backdrop" onClick={() => setMobileOpen(false)} aria-hidden />

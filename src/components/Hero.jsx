@@ -3,6 +3,8 @@ import { ArrowDown, Mail, Terminal } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, LeetcodeIcon } from './icons';
 import './Hero.css';
 
+const PROFILE_PHOTO = '/profile.jpeg';
+
 export default function Hero() {
   const canvasRef = useRef(null);
 
@@ -16,15 +18,15 @@ export default function Hero() {
     let spawnTimer = 0;
 
     const resize = () => {
-      canvas.width  = canvas.offsetWidth;
+      canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
     };
     resize();
     window.addEventListener('resize', resize);
 
     const COLORS = [
-      { r: 0,   g: 240, b: 255 }, // cyan
-      { r: 168, g: 85,  b: 247 }, // purple
+      { r: 0, g: 240, b: 255 }, // cyan
+      { r: 168, g: 85, b: 247 }, // purple
       { r: 120, g: 160, b: 255 }, // periwinkle
       { r: 200, g: 100, b: 255 }, // violet
     ];
@@ -40,14 +42,14 @@ export default function Hero() {
         ? -20 + Math.random() * canvas.height * 0.3
         : -20;
 
-      const speed  = 2.8 + Math.random() * 2.2;
-      const angle  = (Math.PI / 4) + (Math.random() - 0.5) * 0.35; // ~45° down-left
+      const speed = 2.8 + Math.random() * 2.2;
+      const angle = (Math.PI / 4) + (Math.random() - 0.5) * 0.35; // ~45° down-left
       const length = 90 + Math.random() * 160;
 
       meteors.push({
         x, y,
         vx: -Math.cos(angle) * speed,
-        vy:  Math.sin(angle) * speed,
+        vy: Math.sin(angle) * speed,
         length,
         life: 1,           // 1 → 0
         decay: 0.012 + Math.random() * 0.01,
@@ -73,17 +75,17 @@ export default function Hero() {
         const tailY = m.y - m.vy * (m.length / (Math.abs(m.vx) + Math.abs(m.vy)));
 
         const grad = ctx.createLinearGradient(m.x, m.y, tailX, tailY);
-        grad.addColorStop(0,   `rgba(${m.r},${m.g},${m.b}, ${m.life * 0.92})`);
+        grad.addColorStop(0, `rgba(${m.r},${m.g},${m.b}, ${m.life * 0.92})`);
         grad.addColorStop(0.3, `rgba(${m.r},${m.g},${m.b}, ${m.life * 0.4})`);
-        grad.addColorStop(1,   `rgba(${m.r},${m.g},${m.b}, 0)`);
+        grad.addColorStop(1, `rgba(${m.r},${m.g},${m.b}, 0)`);
 
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(m.x, m.y);
         ctx.lineTo(tailX, tailY);
         ctx.strokeStyle = grad;
-        ctx.lineWidth   = m.width * m.life;
-        ctx.lineCap     = 'round';
+        ctx.lineWidth = m.width * m.life;
+        ctx.lineCap = 'round';
         ctx.stroke();
 
         // Bright head dot
@@ -103,8 +105,8 @@ export default function Hero() {
         ctx.restore();
 
         // Advance meteor
-        m.x   += m.vx;
-        m.y   += m.vy;
+        m.x += m.vx;
+        m.y += m.vy;
         m.life -= m.decay;
 
         // Remove when faded or off-screen
@@ -139,86 +141,101 @@ export default function Hero() {
       {/* Gradient radial glow behind heading */}
       <div className="hero__glow" aria-hidden />
 
-      <div className="container hero__content">
-        {/* Status tag */}
-        <div className="hero__status">
-          <span className="status-dot" />
-          <span className="label-code">Available for opportunities</span>
+      <div className="container hero__inner">
+        {/* Left column: Text & Information (positioned nicely on the left) */}
+        <div className="hero__content">
+          {/* Status tag */}
+          <div className="hero__status">
+            <span className="status-dot" />
+            <span className="label-code">Available for opportunities</span>
+          </div>
+
+          <h1 className="hero__heading display-hero">
+            <span className="hero__name-line">Aayush</span>
+            <span className="hero__name-line hero__name-line--accent">Kumar</span>
+          </h1>
+
+          <div className="hero__role headline-md">
+            <Terminal size={18} strokeWidth={1.5} />
+            <span>Software Developer</span>
+            <span className="hero__role-dot" />
+            <span>Full-Stack Engineer</span>
+          </div>
+
+          <p className="hero__bio body-lg">
+            I architect and ship high-performance software systems. Obsessed with
+            clean abstractions, developer experience, and the craft of building
+            things that scale.
+          </p>
+
+          <div className="hero__actions">
+            <button className="btn-primary" onClick={scrollToProjects}>
+              View Projects
+              <ArrowDown size={16} strokeWidth={2} />
+            </button>
+            <a
+              href="mailto:aayushsinghbgs@gmail.com"
+              className="btn-ghost"
+              id="hero-contact-btn"
+            >
+              Get in Touch
+              <Mail size={16} strokeWidth={2} />
+            </a>
+          </div>
+
+          <div className="hero__social">
+            <a
+              href="https://github.com/AayushBGS45/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-link"
+              aria-label="GitHub profile"
+              id="hero-github-link"
+            >
+              <GithubIcon size={18} strokeWidth={1.5} />
+            </a>
+            <a
+              href="https://leetcode.com/u/AayushBGS45/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-link"
+              aria-label="LeetCode profile"
+              id="hero-leetcode-link"
+            >
+              <LeetcodeIcon size={18} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/aayush-kumar-b3a46b29a/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-link"
+              aria-label="LinkedIn profile"
+              id="hero-linkedin-link"
+            >
+              <LinkedinIcon size={18} strokeWidth={1.5} />
+            </a>
+            <a
+              href="mailto:aayushsinghbgs@gmail.com"
+              className="social-link"
+              aria-label="Email"
+              id="hero-email-link"
+            >
+              <Mail size={18} strokeWidth={1.5} />
+            </a>
+          </div>
         </div>
 
-        <h1 className="hero__heading display-hero">
-          <span className="hero__name-line">Aayush</span>
-          <span className="hero__name-line hero__name-line--accent">Kumar</span>
-        </h1>
+        {/* Right column: Big Photo (Clean display without any overlays) */}
+        <div className="hero__visual">
+          <div className="hero__photo-ambient" aria-hidden />
 
-        <div className="hero__role headline-md">
-          <Terminal size={18} strokeWidth={1.5} />
-          <span>Software Developer</span>
-          <span className="hero__role-dot" />
-          <span>Full-Stack Engineer</span>
-        </div>
-
-        <p className="hero__bio body-lg">
-          {/* Placeholder — replace with your actual bio */}
-          I architect and ship high-performance software systems. Obsessed with
-          clean abstractions, developer experience, and the craft of building
-          things that scale.
-        </p>
-
-        <div className="hero__actions">
-          <button className="btn-primary" onClick={scrollToProjects}>
-            View Projects
-            <ArrowDown size={16} strokeWidth={2} />
-          </button>
-          <a
-            href="mailto:aayushsinghbgs@gmail.com"
-            className="btn-ghost"
-            id="hero-contact-btn"
-          >
-            Get in Touch
-            <Mail size={16} strokeWidth={2} />
-          </a>
-        </div>
-
-        <div className="hero__social">
-          <a
-            href="https://github.com/AayushBGS45/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-link"
-            aria-label="GitHub profile"
-            id="hero-github-link"
-          >
-            <GithubIcon size={18} strokeWidth={1.5} />
-          </a>
-          <a
-            href="https://leetcode.com/u/AayushBGS45/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-link"
-            aria-label="LeetCode profile"
-            id="hero-leetcode-link"
-          >
-            <LeetcodeIcon size={18} />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/aayush-kumar-b3a46b29a/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-link"
-            aria-label="LinkedIn profile"
-            id="hero-linkedin-link"
-          >
-            <LinkedinIcon size={18} strokeWidth={1.5} />
-          </a>
-          <a
-            href="mailto:aayushsinghbgs@gmail.com"
-            className="social-link"
-            aria-label="Email"
-            id="hero-email-link"
-          >
-            <Mail size={18} strokeWidth={1.5} />
-          </a>
+          <div className="hero__photo-card">
+            <img
+              src={PROFILE_PHOTO}
+              alt="Aayush Kumar"
+              className="hero__photo-img"
+            />
+          </div>
         </div>
       </div>
 
